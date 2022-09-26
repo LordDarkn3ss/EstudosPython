@@ -1,0 +1,51 @@
+# Test de Funções e Arrays no PYTHON
+
+list_name_char = []
+list_vida_base_char = []
+list_mana_base_char = []
+
+
+def new_char():  # Cria um novo personagem
+    list_name_char.append(input("Digite o nome do novo personagem: "))
+    list_vida_base_char.append(int(input("Qual a vida base do personagem?: ")))
+    list_mana_base_char.append(int(input("Qual a mana base do personagem?: ")))
+    print("O [ID] do seu personagem é:", len(list_name_char) - 1)
+
+
+def show_char():  # Mostra o status de algum personagem
+    if len(list_name_char) == 0:
+        print("Não existe nenhum personagem para mostrar")
+    else:
+        char_id = int(input("Informe o [ID] do seu personagem: "))
+        while char_id < 0 or char_id > len(list_name_char) - 1:
+            print("ID INVALIDO")
+        else:
+            print("Nome:", list_name_char[char_id])
+            print("Vida:", list_vida_base_char[char_id])
+            print("Mana:", list_mana_base_char[char_id])
+
+
+def show_char_list():  # Mostra o nome de todos os personagens e seus ID
+    count = 0
+    for x in list_name_char:
+        print(f"ID: {count} | Personagem: {x}")
+        count += 1
+
+
+while True:  # looping do programa
+    print(30*"=")
+    comando = input("Comando: ")
+    match comando:
+        case "/new char":
+            new_char()
+        case "/show char":
+            show_char()
+        case "/show char list":
+            show_char_list()
+        case "/help":
+            print('''Os comandos são:
+/new char
+/show char
+/show char list''')
+        case _:
+            print("COMANDO INVALIDO\nDigite > /help < para ver os comandos")
