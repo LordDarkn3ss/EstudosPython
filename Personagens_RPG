@@ -1,0 +1,88 @@
+# Test de Funções e Arrays no PYTHON
+from tkinter import *
+"""
+                      ---- DOCUMENTAÇÃO ----
+                    
+                    o nome das listas começam com "list"
+                    o nome das janelas começam com "window"
+                    o nome das funções que criam janelas terminam com "create"
+                    
+"""
+
+list_name_char = []
+list_life_base_char = []
+list_mana_base_char = []
+
+
+def new_char_window_create():  # Janela pra criar um novo personagem
+    window_new_char = Tk()
+    window_new_char.geometry('400x200')
+    window_new_char.title("Criador de Personagem")
+
+    text1 = Label(window_new_char, text="name: ")
+    text1.grid(column=0, row=1)
+    name = Entry(window_new_char, width=30)
+    name.grid(column=1, row=1)
+
+    text2 = Label(window_new_char, text="life base: ")
+    text2.grid(column=0, row=2)
+    life = Entry(window_new_char, width=10)
+    life.grid(column=1, row=2)
+
+    text3 = Label(window_new_char, text="Mana base: ")
+    text3.grid(column=0, row=3)
+    mana = Entry(window_new_char, width=10)
+    mana.grid(column=1, row=3)
+
+    save_char = Button(window_new_char, text="Salvar Personagem", command=lambda: 
+    [save_new_char(name, life, mana), window_new_char.after(100, window_new_char.destroy())])
+    save_char.grid(column=1, row=4)
+
+
+def save_new_char(name, life, mana):  # Salva os dados do novo personagem
+    list_name_char.append(name.get())
+    list_life_base_char.append(life.get())
+    list_mana_base_char.append(mana.get())
+
+
+"""
+def show_char_window_create():  # Mostra o status de algum personagem
+    window_show_char = Tk()
+    window_show_char.geometry('400x200')
+    window_show_char.title("Dados de Personagem")
+
+    text1 = Label(window_show_char, text="ID do Personagem: ")
+    text1.grid(column=0, row=1)
+    char_id = Entry(window_show_char, width=10)
+    char_id.grid(column=1, row=1)
+
+    name = Label(window_show_char, text=list_name_char[id])
+    name.grid(column=0, row=1)
+
+    life = Label(window_show_char, text="Vida "+ list_life_base_char[id])
+    life.grid(column=0, row=1)
+
+    mana = Label(window_show_char, text="Mana "+ list_mana_base_char[id])
+    mana.grid(column=0, row=1)
+"""
+
+
+def show_char_list():  # Mostra o name de todos os personagens e seus ID
+    count = 0
+    for x in list_name_char:
+        print(f"ID: {count} | Personagem: {x}")
+        count += 1
+
+
+window = Tk()
+window.geometry('400x200')
+window.title("Personagens")
+button_new_char = Button(window, text="Novo Personagem", command=new_char_window_create)
+button_new_char.grid(column=0, row=1)
+# button_show_char = Button(window, text="Ver Personagem", command=show_char_window_create())
+# button_show_char.grid(column=0, row=2)
+button_char_list = Button(window, text="Lista de Personagens")
+button_char_list.grid(column=0, row=3)
+
+
+window.mainloop()
