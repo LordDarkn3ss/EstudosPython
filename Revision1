@@ -1,0 +1,148 @@
+# Como funciona uma lista?
+
+"""
+int = -1 | -234 | 0 | 1004 | 2022    ou seja, números inteiros
+float = 0.500 | 1.25 | 3.5     ou seja, números reais
+string = "Palavras, Números, Caracteres em geral
+bool = True | False
+
+
+lista = []
+
+dentro do [] você coloca os DADOS que você quer por em uma lista
+
+lista = ["Arroz", "Feijão", "Ketchup, "Canela", "Trigo", "Refrigerante"]
+
+essa "Lista" no momento tem um tamanho de 6 elementos, indexados de 0 até 5
+
+ou seja, lembrando que todo primeiro elemento está localizado no endereço 0
+em listas de tamanho 10, o primeiro se localiza no 0 e o ultimo se localiza no 9
+
+Se quisermos mostrar a string "Trigo", por estar localizada no endereço [4] (quinto espaço) precisamos fazer:
+
+print(lista[4])  # Essa linha vai estar pedindo para mostrar no console o elemento do endereço [4] na "lista"
+
+
+Uma lista não precisa já começar possuindo dados, por isso temos uma função para adicionar algum dado ao ultimo
+endereço da lista, essa função se chama "append"
+
+vamos supor que eu quero adicionar "Cerveja" na minha lista
+
+lista.append("Cerveja")  # Essa linha ta adicionando ao ultimo endereço da lista um novo dado, logo a lista vai ser:
+
+["Arroz", "Feijão", "Ketchup, "Canela", "Trigo", "Refrigerante", "Cerveja"]
+
+"""
+
+"""
+# Atividade 1
+valor = float(input("Me informe um número: "))
+while valor == 0:
+    valor = float(input("ZERO é inválido, por favor informe outro número: "))
+else:
+    if valor % 2 == 0:
+        print(f"{valor} é par")
+    else:
+        print(f"{valor} é impar")
+
+
+# Atividade 2
+idade = int(input("Me informe sua idade: "))
+print(f"Você nasceu em {2022-idade}")
+
+
+# Atividade 3
+a = float(input("Me informe um número: "))
+b = float(input("Me informe outro número: "))
+c = float(input("Me informe outro número: "))
+
+if a > b and a > c:
+    print(f"{a} é o maior")
+elif b > a and b > c:
+    print(f"{b} é o maior")
+else:
+    print(f"{c} é o maior")
+
+
+# Atividade 4
+base = float(input("Me informe a base do triângulo: "))
+altura = float(input("Me informe a altura do triângulo: "))
+
+area = (base*altura)/2
+print(f"A área do triângulo é {area}")
+
+
+# Atividade 5
+media = 0
+for x in range(4):
+    media += float(input("Me informe algum número: "))
+media /= 4
+print(f"A média foi {media}")
+
+
+# Atividade 6
+valor = int(input("Me informe um número: "))
+print(f"Seu antecessor é o {valor-1}")
+
+
+# Atividade 7
+anos = int(input("Você tem quantos anos?: "))
+meses = int(input("+Quantos meses?: "))
+dias = int(input("+Quantos dias?: "))
+
+idade_em_dias = (365*anos)+(meses*30)+dias
+
+print(f"Desde que você nasceu, se passaram {idade_em_dias} dias")
+
+
+# Atividade 8
+eleitores = int(input("Quantos eleitores tem no município: "))
+v_brancos = int(input("Quantos votos foram brancos?: "))
+v_nulos = int(input("Quantos votos foram nulos?: "))
+v_validos = int(input("Quantos votos foram validos?: "))
+
+print(f'''
+De {eleitores} votos
+{(v_brancos/eleitores)*100}% foram brancos
+{(v_nulos/eleitores)*100}% foram nulos
+{(v_validos/eleitores)*100}% foram validos
+''')
+
+# Atividade 9
+
+v1 = float(input("Diga um valor: "))
+v2 = float(input("Diga outro valor: "))
+while v1 == v2:
+    v2 = float(input("Eu pedi OUTRO valor, não um igual.\nPor favor diga um valor diferente: "))
+else:
+    if v1>v2:
+        print(f"{v1} é maior que {v2}")
+    else:
+        print(f"{v2} é maior que {v1}")
+
+
+# Atividade 10
+hora_inicio = int(input("Que hora o jogo de Xadrez começou: "))
+while hora_inicio > 24 or hora_inicio < 1:
+    hora_inicio = int(input("Hora inválido\nQue hora o jogo de Xadrez começou: "))
+hora_fim = int(input("Que hora o jogo acabou?: "))
+while hora_fim > 24 or hora_fim < 1:
+    hora_fim = int(input("Hora inválido\nQue hora o jogo acabou: "))
+
+if hora_fim >= hora_inicio:
+    horas_passadas = hora_fim - hora_inicio
+    print(horas_passadas)
+else:
+    horas_passadas = 24-(hora_inicio-hora_fim)
+    print(horas_passadas)
+"""
+
+# Atividade 11
+apple_price = 1.30
+apple_pack_price = 1
+apple = int(input("Quantas maçãs vc comprou?: "))
+if apple >= 12:
+    print(f"Tu vai pagar R$ {apple*apple_pack_price}")
+else:
+    print(f"Tu vai pagar R$ {apple * apple_price}")
+    
