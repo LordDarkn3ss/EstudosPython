@@ -1,0 +1,44 @@
+'''
+
+# Atividade 1
+# Pedir 20 números e mostrar esses 2pe0 números na ordem inversa
+
+lista_n = []
+
+
+
+for x in range(5):
+    lista_n.append(float(input("Insira um número: ")))
+
+for percorredor in range(5):
+    if lista_n[percorredor] % 2 != 0:
+        print(lista_n[percorredor], "é impar")
+
+'''
+
+# 1 Guardar em uma variável a quantidade de alunos
+quant_alunos = int(input("Informe a qauntidade de alunos: "))
+
+# 2 guardar em uma lista os nomes dos alunos
+
+nomes_alunos = []
+notas_alunos = []
+
+for x in range (quant_alunos):
+    nomes_alunos.append(input("Adicione o nome do aluno: "))
+    notas_alunos.append(input("Adicione a nota do aluno: "))
+# 1 Criar uma lista para guardar as notas
+# 2 adicionar a lista a nota
+# 3 criar um for para mostrar o perfil dos alunos (aprovados e reprovados)
+
+for index in range (quant_alunos):
+    if notas_alunos[index] >= 6:
+        print(f."nomes_alunos )
+
+
+# INCOMPLETO - VAI COMPLETAR AINDA
+
+
+
+
+
