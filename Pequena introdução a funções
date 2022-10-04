@@ -1,0 +1,48 @@
+# Aula de funções
+"""
+Já imaginou, por exemplo, toda a vez que quiser mostrar uma lista ter que reescrever tudo de novo?
+É para isso que existem as funções, elas servem para chamar uma parte do algoritimo
+de maneira mais otimizada.
+
+Irei mostrar como se declara uma função.
+"""
+
+
+def exemplo():  # Usamos o "DEF" para dizer que se trata de uma função, em seguida nomeamos essa função
+    print("Isso é um exemplo")  # Essa impressão por estar dentro na função vai ser executada toda vez
+                                # que a função for chamada
+
+
+exemplo()  # Essa linha vai chamar tudo dentro dessa função, ou seja, a impressão
+
+
+"""
+Percebeu que depois do nome da função tem (parenteses)? isso serve para atribuir valores e variaveis de fora
+da função para dentro, de um jeito que mantem organizado e evita conflitos
+
+vou exemplificar
+"""
+
+
+def somar(valor1, valor2):  # Aqui na função temos duas variaveis que vão precisar de valores
+    print(valor1 + valor2)  # Aqui mostramos a soma das variaveis
+
+
+somar(10, 3)  # Aqui atribuímos esses valores para as variaveis da função, 10 para <valor1>, 3 para <valor2>
+
+
+# Vamos criar 2 listas diferentes, e mostrar cada uma usando o mesmo algoritimo
+
+lista_nomes = ["Arnaldo", "Bernado", "Carol", "Duda"]
+lista_numeros = [1, 3, 4, 8]
+
+# Vamos criar o algoritimo que vai mostrar qualquer lista, independente do tamanho
+
+
+def mostrar_lista(lista):  # Aqui temos variavel que vai ser atribuida pelos vetores na função
+    for pecorredor in range(len(lista)):  # Aqui temos o LEN que vai ler o tamanho do vetor
+        print(lista[pecorredor])  # Aqui vamos mostrar cada elemento do vetor separadamente
+
+
+mostrar_lista(lista_nomes)  # Aqui vamos mostrar o vetor de nomes
+mostrar_lista(lista_numeros)  # Aqui vamos mostrar o vetor de números
