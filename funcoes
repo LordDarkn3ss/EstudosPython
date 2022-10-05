@@ -1,0 +1,36 @@
+def mediar(a, b):
+    print((a+b)/2)
+
+
+def somar(a, b):
+    print(a+b)
+
+
+def mostrar_lista(lista):
+    for x in range(len(lista)):
+        print(lista[x])
+
+
+def elogiar_pessoa(nome):
+    print(f"{nome} é uma pessoa muito legal")
+
+
+def mostrar_numeros_atv1(valor):
+    for x in range(1, valor+1):
+        print(x * f"{x}-")
+
+
+def mostrar_numeros_atv2(valor):
+    for x in range(1, valor+1):
+        print("")
+        for y in range(1, x+1):
+            print(y, end=" ")
+
+
+def quant_vogais(texto):
+    cont = 0
+    vogais = "aeiouAEIOUáéíóúÁÉÍÓÚãõÃÕâêôÂÊÔà"
+    for x in texto:
+        if x in vogais:
+            cont += 1
+    print(f" Tem {cont} vogais no texto")
