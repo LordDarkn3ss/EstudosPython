@@ -34,3 +34,33 @@ def quant_vogais(texto):
         if x in vogais:
             cont += 1
     print(f" Tem {cont} vogais no texto")
+
+# atividade mediar alunos
+
+lista_alunos = []
+lista_notas = []
+
+
+def mediar_aluno(nome_aluno, n1, n2):
+    lista_alunos.append(nome_aluno)
+    lista_notas.append((n1+n2)/2)
+
+
+def new_aluno():
+    nome = input("Nome do aluno: ")
+    nota1 = float(input("Primeira nota: "))
+    nota2 = float(input("Segunda nota: "))
+    mediar_aluno(nome, nota1, nota2)
+
+    resposta = input("Você deseja adicionar outro aluno? S/N: ").upper()
+    if resposta == "S":
+        print(30 * "=")
+        new_aluno()
+    else:
+        print(30 * "=")
+        show_alunos()
+
+
+def show_alunos():
+    for x in range(len(lista_alunos)):
+        print(lista_alunos[x], lista_notas[x])
