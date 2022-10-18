@@ -1,0 +1,80 @@
+matriz = [["x", "o", "o"],
+          ["o", "x", "x"],
+          ["o", "x", "o"]]
+
+
+def testar_x():
+    # Testar Horizontais
+    for xm in range(3):
+        if matriz[xm] == ["x", "x", "x"]:
+            return True
+
+    # Testar Verticais
+    for xm in range(3):
+        sequencia = 0
+        for ym in range(3):
+            if matriz[ym][xm] == "x":
+                sequencia += 1
+        if sequencia == 3:
+            return True
+
+    # Testar Diagonais
+    if matriz[0][0] == "x":
+        if matriz[1][1] == "x":
+            if matriz[2][2] == "x":
+                return True
+
+    if matriz[0][2] == "x":
+        if matriz[1][1] == "x":
+            if matriz[2][0] == "x":
+                return True
+
+
+def testar_o():
+    # Testar Horizontais
+    for xm in range(3):
+        if matriz[xm] == ["o", "o", "o"]:
+            return True
+
+    # Testar Verticais
+    for xm in range(3):
+        sequencia = 0
+        for ym in range(3):
+            if matriz[ym][xm] == "o":
+                sequencia += 1
+        if sequencia == 3:
+            return True
+
+    # Testar Diagonais
+    if matriz[0][0] == "o":
+        if matriz[1][1] == "o":
+            if matriz[2][2] == "o":
+                return True
+
+    if matriz[0][2] == "o":
+        if matriz[1][1] == "o":
+            if matriz[2][0] == "o":
+                return True
+
+
+x_win = testar_x()
+o_win = testar_o()
+
+for linha in range(3):
+    for coluna in range(3):
+        print(f"[{matriz[linha][coluna]:^3}]", end='')
+    print()
+
+
+if x_win:
+    print("X Ganhou")
+elif o_win:
+    print("BOLINHA Ganhou")
+else:
+    vazio = False
+    for x in range(3):
+        for y in range(3):
+            if matriz[x][y] == "":
+                vazio = True
+    if not vazio:
+        print("Deu velha")
