@@ -1,11 +1,13 @@
-matriz = [["x", "o", "o"],
-          ["o", "x", "x"],
-          ["o", "x", "o"]]
+matriz = [["", "", ""],
+          ["", "", ""],
+          ["", "", ""]]
 """
 [0,0][0,1][0,2]
-[1,0][1,1][1,2]
+[1,0][1,1][1,2]  isso é uma matriz 3x3, bem parecido a um plano cartezeano, isso pq plano cartezeano é uma matriz
 [2,0][2,1][2,2]
 
+Outro exemplo de matriz é um jogo da velha, sabemos que se fizermos uma linha de 3 formas, ganhamos, mas como
+funciona essa linha vizualizando em uma matriz?
 
 linhas para ganhar 
 
@@ -17,77 +19,62 @@ linhas para ganhar
 
 ----------------------------
 
-[0,0][1,0][2,0] Vertical 1
+[0,0]
+[1,0]
+[2,0] Vertical 1
 
-[0,1][1,1][2,1] Vertical 2
+[0,1]
+[1,1]
+[2,1] Vertical 2
 
-[0,2][1,2][2,2] Vertical 3
+[0,2]
+[1,2]
+[2,2] Vertical 3
 
 ----------------------------
 
-[0,0][1,1][2,2] Diagonal 1
+[0,0]
+     [1,1]
+          [2,2] Diagonal 1
 
-[0,2][1,1][2,0] Diagonal 2
+
+          [2,0] 
+     [1,1]
+[0,2]           Diagonal 2
 
 """
 
 
-def testar_x():
+def testar_forma(forma):
     # Testar Horizontais
     for xm in range(3):
-        if matriz[xm] == ["x", "x", "x"]:
+        if matriz[xm] == [forma, forma, forma]:
             return True
 
     # Testar Verticais
     for xm in range(3):
         sequencia = 0
         for ym in range(3):
-            if matriz[ym][xm] == "x":
+            if matriz[ym][xm] == forma:
                 sequencia += 1
         if sequencia == 3:
             return True
 
     # Testar Diagonais
-    if matriz[0][0] == "x":
-        if matriz[1][1] == "x":
-            if matriz[2][2] == "x":
+    if matriz[0][0] == forma:
+        if matriz[1][1] == forma:
+            if matriz[2][2] == forma:
                 return True
 
-    if matriz[0][2] == "x":
-        if matriz[1][1] == "x":
-            if matriz[2][0] == "x":
-                return True
-
-
-def testar_o():
-    # Testar Horizontais
-    for xm in range(3):
-        if matriz[xm] == ["o", "o", "o"]:
-            return True
-
-    # Testar Verticais
-    for xm in range(3):
-        sequencia = 0
-        for ym in range(3):
-            if matriz[ym][xm] == "o":
-                sequencia += 1
-        if sequencia == 3:
-            return True
-
-    # Testar Diagonais
-    if matriz[0][0] == "o":
-        if matriz[1][1] == "o":
-            if matriz[2][2] == "o":
-                return True
-
-    if matriz[0][2] == "o":
-        if matriz[1][1] == "o":
-            if matriz[2][0] == "o":
+    if matriz[0][2] == forma:
+        if matriz[1][1] == forma:
+            if matriz[2][0] == forma:
                 return True
 
 
-x_win = testar_x()
-o_win = testar_o()
+
+x_win = testar_forma("x")
+o_win = testar_forma("o")
 
 for linha in range(3):
     for coluna in range(3):
