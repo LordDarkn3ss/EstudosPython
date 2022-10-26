@@ -3,14 +3,14 @@ import datetime  # Biblioteca de tempo
 
 def captar_data():  # Função para retornar como String a data atual
     data = datetime.datetime.now()
-    return data.strftime("%d/%m/%Y %H:%M")
+    return data.strftime("%d/%m/%Y %H:%M:%S")
 
 
 class BankAccount:  # Classe da conta bancária
 
-    def __init__(self, num, saldo, limite, nome, tipo, 
+    def __init__(self, num, saldo, limite, nome, tipo,
                  list_extrato=None, list_saldo=None, list_data=None, status=False):
-        
+
         # Esses "IFs" testam se as listas começam vazias para iniciar elas como vazias
         if list_extrato is None:
             list_extrato = []
@@ -24,7 +24,7 @@ class BankAccount:  # Classe da conta bancária
         self.saldo = saldo  # 'Float' com o saldo da conta
         self.nome = nome  # 'String' com o mome do dono da conta
         self.tipo = tipo  # 'String' que diz se a conta é CORRENTE ou POUPANÇA
-        self.limite = limite  # 'Int' que diz o quanto a conta pode dever
+        self.limite = limite  # 'Int.' que diz o quanto a conta pode dever
         self.list_extrato = list_extrato  # Lista que vai guardar o valor de cada deposito ou saque
         self.list_saldo = list_saldo  # Lista que vai guardar o saldo depois de cada operação
         self.list_data = list_data  # lista que vai guardar a data de cada operação
@@ -65,7 +65,7 @@ class BankAccount:  # Classe da conta bancária
             if valor_saque > self.saldo and self.limite == 0:
                 print("== SALDO INSUFICIENTE ==")
             else:
-                if (self.saldo - valor_saque) < (self.limite*-1):   # Só sacar se tiver o limite na conta
+                if (self.saldo - valor_saque) < (self.limite * -1):  # Só sacar se tiver o limite na conta
                     print("== SEM LIMITE PARA O SAQUE ==")
                 elif valor_saque >= self.saldo:  # SAQUE COM O LIMITE
                     self.saldo -= valor_saque  # Subtrair o valor do parametro no SALDO
@@ -123,3 +123,59 @@ TIPO:       {self.tipo}
 SALDO:      {self.saldo}
 LIMITE:     {self.limite}
 =======================================""")
+
+# Estudo de herança
+
+
+class Animal:
+    def __init__(self, nome, cor):
+        self.nome = nome
+        self.cor = cor
+
+    def comer(self):
+        print(f"O {self.nome} foi comer...")
+
+
+class Gato(Animal):
+    def __int__(self, nome, cor):
+        super().__init__(nome, cor)
+
+    def miar(self):
+        print(f"O {self.nome} foi miar...")
+
+
+class Vaca(Animal):
+    def __int__(self, nome, cor):
+        super().__init__(nome, cor)
+
+    def mugir(self):
+        print(f"O {self.nome} foi mugir...")
+
+
+class Cachorro(Animal):
+    def __int__(self, nome, cor):
+        super().__init__(nome, cor)
+
+    def latir(self):
+        print(f"O {self.nome} foi latir...")
+
+
+class Coelho(Animal):
+    def __init__(self, nome, cor):
+        super().__init__(nome, cor)
+
+    def pular(self):
+        print(f"O {self.nome} foi pular...")
+
+
+class Ingresso:
+    def __init__(self, valor):
+        self.valor = valor
+
+    def mostrar_valor(self):
+        print(f"O valor do ingresso é R$: {self.valor}")
+
+
+class IngressoVip(Ingresso):
+    def __init__(self, valor):
+        super().__init__(valor+(valor/2))
