@@ -1,134 +1,273 @@
-class Pessoa:
-    def __init__(self, nome, peso, idade, comendo=False, dormindo=False, falando=False):
-        self.nome = nome
-        self.peso = peso
-        self.idade = idade
-        self.comendo = comendo
-        self.dormindo = dormindo
-        self.falando = falando
+import datetime  # Biblioteca de tempo
 
-    def comer(self):
-        if self.falando:
-            print(f"{self.nome} tem que parar de falar antes de ir comer")
-        elif self.dormindo:
-            print(f"{self.nome} tem que acordar antes de ir comer")
+
+def captar_data():  # Função para retornar como String a data atual
+    data = datetime.datetime.now()
+    return data.strftime("%d/%m/%Y %H:%M:%S")
+
+
+class BankAccount:  # Classe da conta bancária
+
+    def __init__(self, num, saldo, limite, nome, tipo,
+                 list_extrato=None, list_saldo=None, list_data=None, status=False):
+
+        # Esses "IFs" testam se as listas começam vazias para iniciar elas como vazias
+        if list_extrato is None:
+            list_extrato = []
+        if list_saldo is None:
+            list_saldo = []
+        if list_data is None:
+            list_data = []
+
+        # Declarando os atributos
+        self.num = num  # 'String' contendo o número da conta
+        self.saldo = saldo  # 'Float' com o saldo da conta
+        self.nome = nome  # 'String' com o mome do dono da conta
+        self.tipo = tipo  # 'String' que diz se a conta é CORRENTE ou POUPANÇA
+        self.limite = limite  # 'Int.' que diz o quanto a conta pode dever
+        self.list_extrato = list_extrato  # Lista que vai guardar o valor de cada deposito ou saque
+        self.list_saldo = list_saldo  # Lista que vai guardar o saldo depois de cada operação
+        self.list_data = list_data  # lista que vai guardar a data de cada operação
+        self.status = status  # 'Boolean' que vai dizer se a conta está ATIVA ou DESATIVADA
+
+    def ativar(self):
+        if self.status:  # Se aconta já estiver ativa, informar que não pode ser ativada novamente
+            print("== ERRO, CONTA JA ATIVA ==")
         else:
-            if self.comendo:
-                print(f"{self.nome} já tá comendo")
-            else:
-                print(f"{self.nome} foi comer")
-                self.comendo = True
+            self.status = True  # Se não, ativar conta
+            print("== CONTA ATIVADA COM SUCESSO ==")
 
-    def parar_comer(self):
-        if not self.comendo:
-            print(f"{self.nome} não tá comendo")
+    def desativar(self):
+        if not self.status:  # Se a conta já estiver desativada, informar que não pode ser desativada novamente
+            print("== ERRO, CONTA JA DESATIVADA ==")
         else:
-            print(f"{self.nome} parou de comer")
-            self.comendo = False
+            if self.saldo != 0:  # Não desativar a conta se ainda tiver saldo
+                print("== ERRO, CONTA AINDA COM SALDO ==")
+            else:
+                self.status = False  # Se não, desativar conta
+                print("== CONTA DESATIVADA COM SUCESSO ==")
 
-    def dormir(self):
-        if self.falando:
-            print(f"{self.nome} tem que parar de falar antes de ir dormir")
-        elif self.comendo:
-            print(f"{self.nome} tem que parar de comer antes de ir dormir")
+    def depositar(self, valor_deposito):  # A função vai receber um parametro
+        if not self.status:  # Só depositar se a conta estiver ativa
+            print("== CONTA INATIVA ==")
         else:
-            if self.dormindo:
-                print(f"{self.nome} já tá dormindo")
-            else:
-                print(f"{self.nome} foi dormir")
-                self.dormindo = True
+            self.saldo += valor_deposito  # Adicionar o valor do parametro no SALDO
+            self.list_extrato.append(valor_deposito)  # Contabilizar valor adicionado
+            self.list_saldo.append(self.saldo)  # Contabilizar o SALDO depois da operação
+            self.list_data.append(captar_data())  # Contabilizar a data, chamando a função que capta a mesma
 
-    def acordar(self):
-        if not self.dormindo:
-            print(f"{self.nome} já tá acordado")
+            print("== DEPOSITADO COM SUCESSO ==")
+
+    def sacar(self, valor_saque):  # A função vai receber um parametro
+        if not self.status:  # Só sacar se a conta estiver ativa
+            print("== CONTA INATIVA ==")
         else:
-            print(f"{self.nome} acordou")
-            self.dormindo = False
-
-    def falar(self):
-        if self.comendo:
-            print(f"{self.nome} tem que parar de comer antes de falar")
-        elif self.dormindo:
-            print(f"{self.nome} tem que acordar antes de falar")
-        else:
-            if self.falando:
-                print(f"{self.nome} já ta falando")
+            if valor_saque > self.saldo and self.limite == 0:
+                print("== SALDO INSUFICIENTE ==")
             else:
-                print(f"{self.nome} começou a falar")
-                self.falando = True
-
-    def calar(self):
-        if not self.falando:
-            print(f"{self.nome} já ta calado")
-        else:
-            print(f"{self.nome} parou de falar")
-            self.falando = False
-
-class BankAccount:
-        def __init__(self, num, saldo, nome, tipo, ativa=False):
-            self.num = num
-            self.saldo = saldo
-            self.nome = nome
-            self.tipo = tipo
-            self.ativa = ativa
-
-        def ativar(self):
-            if self.ativa:
-                print("== ERRO, CONTA JA ATIVA ==")
-            else:
-                self.ativa = True
-                print("== CONTA ATIVADA COM SUCESSO ==")
-
-        def desativar(self):
-            if not self.ativa:
-                print("== ERRO, CONTA JA DESATIVADA ==")
-            else:
-                if self.saldo != 0:
-                    print("== ERRO, CONTA AINDA COM SALDO ==")
-                else:
-                    self.ativa = False
-                    print("== CONTA DESATIVADA COM SUCESSO ==")
-
-        def depositar(self, valorDp):
-            if not self.ativa:
-                print("== CONTA INATIVA ==")
-            else:
-                self.saldo += valorDp
-                print("== DEPOSITADO COM SUCESSO ==")
-
-        def sacar(self, valorSq):
-            if not self.ativa:
-                print("== CONTA INATIVA ==")
-            else:
-                if valorSq > self.saldo:
-                    print("== SALDO INSUFICIENTE ==")
-                else:
-                    self.saldo -= valorSq
+                if (self.saldo - valor_saque) < (self.limite * -1):  # Só sacar se tiver o limite na conta
+                    print("== SEM LIMITE PARA O SAQUE ==")
+                elif valor_saque >= self.saldo:  # SAQUE COM O LIMITE
+                    self.saldo -= valor_saque  # Subtrair o valor do parametro no SALDO
+                    self.list_extrato.append(valor_saque * -1)  # Contabilizar valor subtraido
+                    self.list_saldo.append(self.saldo)  # Contabilizar o SALDO depois da operação
+                    self.list_data.append(captar_data())  # Contabilizar a data, chamando a função que capta a mesma
                     print("== SAQUE EFETUADO COM SUCESSO ==")
 
+                else:  # SAQUE SEM LIMITE
+                    self.saldo -= valor_saque  # Subtrair o valor do parametro no SALDO
+                    self.list_extrato.append(valor_saque * -1)  # Contabilizar valor subtraido
+                    self.list_saldo.append(self.saldo)  # Contabilizar o SALDO depois da operação
+                    self.list_data.append(captar_data())  # Contabilizar a data, chamando a função que capta a mesma
+
+                    print("== SAQUE EFETUADO COM SUCESSO ==")
+
+    def mudar_limite(self, valor):
+        if not self.status:  # Só ativar o limite se a conta estiver ativa
+            print("== CONTA INATIVA ==")
+        else:
+            self.limite = valor
+
+    def extrato(self):
+        if not self.status:  # Só mostrar o extrato se a conta estiver ativa
+            print("== CONTA INATIVA ==")
+
+        else:
+            print("\n\n", 18 * "=-")  # Daqui pra baixo é só enfeite, basicamente
+            print(35 * "-")
+
+            for x in range(len(self.list_extrato)):  # Pecorrer o extrato do primeiro ao último
+                if self.list_extrato[x] > 0:  # Se o valor for positivo, mostrar a mensagem de "DEPOSITO"
+                    print(f" DEPOSITOU: {self.list_extrato[x]}"  # Mostrar o valor do depósito X
+                          f"\n SALDO: {self.list_saldo[x]}"  # Mostrar o saldo depois desse depósito
+                          f"\n DATA: {self.list_data[x]}")  # Mostrar a data do depósito
+                    print(35 * "-")
+
+                else:  # Se for negativo, mostrar a mensagem de "SAQUE"
+                    print(f" SACOU: {self.list_extrato[x]}"  # Mostrar o valor do saque X 
+                          f"\n SALDO: {self.list_saldo[x]}"  # Mostrar o saldo depois desse saque
+                          f"\n DATA: {self.list_data[x]}")  # Mostrar a data do saque
+                    print(36 * "-")
+
+            print(18 * "=-")
+
+    def ver_conta(self):
+        if not self.status:  # Só mostrar as informações da conta se ela estiver ativa
+            print("== CONTA INATIVA ==")
+        else:
+            print(f"""
+=======================================
+Nº:         {self.num}
+DONO:       {self.nome}
+TIPO:       {self.tipo}
+SALDO:      {self.saldo}
+LIMITE:     {self.limite}
+=======================================""")
+
+# Estudo de herança
 
 
-        def extrato(self):
-            if not self.ativa:
-                print("== CONTA INATIVA ==")
-            else:
-                status = ""
-                if self.ativa:
-                    status = "Ativa"
-                else:
-                    status = "Desativada"
-                print(f"""
-========================================
-|                                      
-|    Conta: {self.num} - {self.tipo}   
-|    Dono: {self.nome}                 
-|    Status: {status}              
-|    Saldo Atual: {self.saldo}         
-|                                      
-========================================
-    
-                                    """)
+class Animal:
+    def __init__(self, nome, cor):
+        self.nome = nome
+        self.cor = cor
+
+    def comer(self):
+        print(f"O {self.nome} foi comer...")
 
 
+class Gato(Animal):
+    def __int__(self, nome, cor):
+        super().__init__(nome, cor)
+
+    def miar(self):
+        print(f"O {self.nome} foi miar...")
 
 
+class Vaca(Animal):
+    def __int__(self, nome, cor):
+        super().__init__(nome, cor)
+
+    def mugir(self):
+        print(f"O {self.nome} foi mugir...")
+
+
+class Cachorro(Animal):
+    def __int__(self, nome, cor):
+        super().__init__(nome, cor)
+
+    def latir(self):
+        print(f"O {self.nome} foi latir...")
+
+
+class Coelho(Animal):
+    def __init__(self, nome, cor):
+        super().__init__(nome, cor)
+
+    def pular(self):
+        print(f"O {self.nome} foi pular...")
+
+
+class Ingresso:
+    def __init__(self, valor):
+        self.valor = valor
+
+    def mostrar_valor(self):
+        print(f"O valor do ingresso é R$: {self.valor}")
+
+
+class IngressoVip(Ingresso):
+    def __init__(self, valor):
+        super().__init__(valor)
+
+    def mostrar_valor_vip(self):
+        print(f"O valor do ingresso vip é R$: {self.valor*1.5}")
+
+
+class Forma:
+    def __init__(self, area=0, perimetro=0):
+        self.area = area
+        self.perimetro = perimetro
+
+
+class Retangulo(Forma):
+    def __init__(self, base, altura, area=0, perimetro=0):
+        self.base = base
+        self.altura = altura
+        super().__init__(area, perimetro)
+
+    def calcular_area(self):
+        self.area = self.base * self.altura
+        print(f"Area do retangulo: {self.area}")
+
+    def calcular_perimetro(self):
+        self.perimetro = (2*self.altura) + (2*self.base)
+        print(f"Perimetro do retangulo: {self.perimetro}")
+
+
+class Triangulo(Forma):
+    def __init__(self, base, altura, area=0, perimetro=0):
+        self.base = base
+        self.altura = altura
+        super().__init__(area, perimetro)
+
+    def calcular_area(self):
+        self.area = (self.base * self.altura) / 2
+        print(f"Area do retangulo: {self.area}")
+
+    def calcular_perimetro(self):
+        self.perimetro = self.base * 3
+        print(f"Perimetro do retangulo: {self.perimetro}")
+
+
+class Atleta:
+    def __init__(self,  aposentado=False):
+        self.aposentado = aposentado
+
+    def aposentar(self):
+        self.aposentado = True
+        print("Aposentou")
+
+    def aquecer(self):
+        if self.aposentado:
+            print("Não pode aquecer, tá aposentado")
+        else:
+            print("Foi aquecer")
+
+
+class Corredor(Atleta):
+    def __init__(self, aposentado=False):
+        super().__init__(aposentado)
+
+    def correr(self):
+        if self.aposentado:
+            print("Não pode correr, tá aposentado")
+        else:
+            print("Foi correr")
+
+
+class Nadador(Atleta):
+    def __init__(self,  aposentado=False):
+        super().__init__(aposentado)
+
+    def nadar(self):
+        if self.aposentado:
+            print("Não pode nadar, tá aposentado")
+        else:
+            print("Foi nadar")
+
+
+class Ciclista(Atleta):
+    def __init__(self, aposentado=False):
+        super().__init__(aposentado)
+
+    def pedalar(self):
+        if self.aposentado:
+            print("Não pode pedalar, tá aposentado")
+        else:
+            print("Foi pedalar")
+
+
+class Triatleta(Ciclista, Nadador, Corredor):
+    def __init__(self, aposentado=False):
+        super().__init__(aposentado)
