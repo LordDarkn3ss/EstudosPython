@@ -1,0 +1,63 @@
+
+'''
+# Calculadora ultra mega sonica
+from bibliotecadeclasses import *
+
+comandos = """
+==================
+1 - Somar
+2 - Subtrair
+3 - Multiplicar
+4 - Dividir
+5 - Sair
+==================
+"""
+while True:
+    print(comandos)
+    comand = input("Qual comando você deseja efetuar?: ")
+
+    if comand != "5":
+        a = float(input("Primeiro valor: "))
+        b = float(input(f"Segundo valor: "))
+        match comand:
+            case "1":
+                print("==SOMANDO==")
+                print(f"Resultado: {somar(a, b)}")
+
+            case "2":
+                print("==SUBTRAINDO==")
+                print(f"Resultado: {subtrair(a, b)}")
+
+            case "3":
+                print("==MULTIPLICANDO==")
+                print(f"Resultado: {mult(a, b)}")
+
+            case "4":
+                try:
+                    print("==DIVIDINDO==")
+                    print(f"Resultado: {dividir(a, b)}")
+
+                except ZeroDivisionError as error:
+                    print(f"OCORREU UM ERRO: {error}")
+
+            case _:
+                print("==COMANDO INVALIDO==")
+    else:
+        print("==SAINDO DA APLICAÇÃO==")
+        break
+'''
+import datetime
+
+def captar_data():  # Função para retornar como String a data atual
+    data = datetime.datetime.now()
+    return data.strftime("%d/%m/%Y %H:%M:%S")
+
+
+
+with open("teste.txt", "a") as arquivo:
+    texto = input("Fala alguma coisa ae: ")
+    arquivo.write(f"\n{captar_data()}: {texto} \n")
+
+with open("teste.txt", "r") as arquivo:
+    texto = arquivo.read()
+    print(texto)
